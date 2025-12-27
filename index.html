@@ -37,21 +37,33 @@
             height: 70px; display: flex; align-items: center;
         }
 
-        /* BARRA DE CATEGORÍAS FIJA */
+        /* BARRA DE CATEGORÍAS FIJA - SIN MÁSCARA (Fix borde negro) */
         .category-bar {
             position: fixed; top: 70px; left: 0; width: 100%; height: 50px;
-            background: rgba(0,0,0,0.9); z-index: 40;
+            background: #000000; z-index: 40; /* Fondo negro puro para limpieza visual */
             display: flex; align-items: center; padding: 0 16px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
         }
 
-        /* SIDEBAR MENU */
+        /* SIDEBAR MENU - SOMBRA LIMPIA */
         .sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .sidebar-backdrop.open { opacity: 1; pointer-events: auto; }
-        .sidebar-menu { position: fixed; top: 0; left: 0; height: 100%; width: 280px; background: #0f0f0f; z-index: 70; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid #222; display: flex; flex-direction: column; }
-        .sidebar-menu.open { transform: translateX(0); }
-        .sidebar-link { width: 100%; text-align: left; padding: 12px 16px; border-radius: 8px; color: #aaa; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
+        
+        .sidebar-menu { 
+            position: fixed; top: 0; left: 0; height: 100%; width: 280px; 
+            background: #0f0f0f; z-index: 70; 
+            transform: translateX(-100%); 
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            border-right: 1px solid #222; 
+            display: flex; flex-direction: column;
+            box-shadow: none; 
+        }
+        .sidebar-menu.open { 
+            transform: translateX(0); 
+            box-shadow: 10px 0 50px rgba(0,0,0,0.5); 
+        }
+
+        .sidebar-link { width: 100%; text-align: left; padding: 12px 16px; border-radius: 8px; color: #aaa; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 12px; transition: all 0.2s; text-decoration: none; }
         .sidebar-link:active, .sidebar-link.active { background: rgba(255,255,255,0.1); color: white; }
 
         /* ANIMACIONES */
@@ -115,8 +127,16 @@
                 <button onclick="window.filterByType('K-Drama'); toggleMenu()" class="sidebar-link" id="link-K-Drama"><i class="fa-solid fa-heart"></i> K-Dramas</button>
                 <button onclick="window.filterByType('Anime'); toggleMenu()" class="sidebar-link" id="link-Anime"><i class="fa-solid fa-dragon"></i> Anime</button>
             </div>
-            <div class="border-t border-gray-800 pt-4 mt-auto">
-                <button onclick="toggleMenu(); openLoginModal()" class="sidebar-link text-red-500"><i class="fa-solid fa-lock"></i> Panel Admin</button>
+            
+            <div class="border-t border-gray-800 pt-4 mt-auto space-y-1">
+                <!-- BOTÓN DE DONACIÓN -->
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Carlosmora040509@gmail.com&item_name=Apoyo+a+CineStream&currency_code=USD" target="_blank" class="sidebar-link text-yellow-500 hover:bg-yellow-500/10 hover:text-yellow-400">
+                    <i class="fa-solid fa-heart"></i> Apoyar (Donar)
+                </a>
+                
+                <button onclick="toggleMenu(); openLoginModal()" class="sidebar-link text-red-500 hover:bg-red-500/10 hover:text-red-400">
+                    <i class="fa-solid fa-lock"></i> Panel Admin
+                </button>
             </div>
         </div>
     </aside>
@@ -222,6 +242,7 @@
                 </div>
 
                 <div id="searchGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
+                
                 <div id="noResults" class="hidden flex-col items-center justify-center py-20 opacity-50">
                     <i class="fa-solid fa-film text-6xl mb-4"></i>
                     <p>No encontramos nada con ese nombre.</p>
@@ -269,7 +290,7 @@
         </div>
     </div>
 
-    <!-- LOGIN MODAL CON HASH Y FALLBACK -->
+    <!-- LOGIN MODAL CON HASH -->
     <div id="loginModal" class="fixed inset-0 z-modal bg-black/95 hidden flex-col items-center justify-center p-6 fade-in backdrop-blur-sm">
         <div class="bg-[#121212] w-full max-w-xs p-8 rounded-3xl border border-gray-800 shadow-2xl relative">
             <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-500 p-2"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -377,9 +398,9 @@
         let currentSeasons = [];
         let viewingMovie = null;
 
-        // SEGURIDAD: Hash + Backup
-        const ADMIN_HASH = "f95205461208e99092497645086d843840242502621021424755106208051252";
-        const BACKUP_CODE = "Sm9zZTU2NTY="; // "Jose5656" en Base64 (para que funcione siempre)
+        // SEGURIDAD: Hash + Backup en Base64
+        const ADMIN_HASH = "f95205461208e99092497645086d843840242502621021424755106208051252"; // SHA256 de Jose5656
+        const BACKUP_CODE = "Sm9zZTU2NTY="; // Base64 de Jose5656 (Fallback infalible)
 
         const GENRES = ['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción', 'Animación', 'Aventura', 'Romance', 'Fantasía'];
         let currentFilter = { type: 'Inicio', genre: null };
@@ -430,7 +451,6 @@
             const term = document.getElementById('searchTerm');
             const count = document.getElementById('resultsCount');
 
-            // Sincronizar
             if(document.activeElement.id === 'desktopSearch') document.getElementById('mobileSearchInput').value = q;
             else document.getElementById('desktopSearch').value = q;
 
@@ -453,7 +473,7 @@
             }
         }
 
-        // --- SEGURIDAD ---
+        // --- SEGURIDAD HÍBRIDA (Hash + Fallback) ---
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -463,14 +483,13 @@
 
         window.togglePassVisibility = () => { const inp = document.getElementById('adminPassword'); inp.type = inp.type === 'password' ? 'text' : 'password'; }
 
-        // VALIDACIÓN MEJORADA (Base64 + Hash)
         window.checkPassword = async () => {
             const inputPass = document.getElementById('adminPassword').value.trim();
             
-            // 1. Fallback Universal (Base64) - Funciona siempre
+            // 1. Fallback Universal (Base64) - Funciona en todos los entornos (http/https/file)
             if(btoa(inputPass) === BACKUP_CODE) { loginSuccess(); return; }
 
-            // 2. Hash Seguro (Solo si el navegador lo permite)
+            // 2. Hash Seguro (Solo si crypto está disponible en el navegador)
             try {
                 if (window.crypto && window.crypto.subtle) {
                     const hash = await sha256(inputPass);
@@ -510,6 +529,7 @@
             if (currentFilter.type !== 'Inicio') displayedMovies = displayedMovies.filter(m => m.type === currentFilter.type);
             if (currentFilter.genre && currentFilter.genre !== 'Todos') displayedMovies = displayedMovies.filter(m => m.category === currentFilter.genre || m.category2 === currentFilter.genre);
 
+            // CORRECCIÓN DEL BUG DE CONTENIDO OCULTO
             if (displayedMovies.length === 0) { 
                 hero.classList.add('hidden'); 
                 rows.classList.add('hidden'); 
@@ -517,7 +537,7 @@
             }
             
             empty.classList.add('hidden'); empty.classList.remove('flex');
-            rows.classList.remove('hidden'); // CORRECCIÓN: Volver a mostrar si estaba oculto
+            rows.classList.remove('hidden'); 
 
             rows.innerHTML = '';
             
