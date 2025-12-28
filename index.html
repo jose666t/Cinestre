@@ -21,7 +21,7 @@
             color: #fff; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
-            padding-top: 120px; /* 70px Header + 50px Categorías */
+            padding-top: 120px; 
             overflow-x: hidden;
         }
 
@@ -37,68 +37,48 @@
             height: 70px; display: flex; align-items: center;
         }
 
-        /* BARRA DE CATEGORÍAS FIJA - SIN MÁSCARA (Fix borde negro) */
+        /* BARRA DE CATEGORÍAS */
         .category-bar {
             position: fixed; top: 70px; left: 0; width: 100%; height: 50px;
-            background: #000000; z-index: 40; /* Fondo negro puro para limpieza visual */
+            background: #000000; z-index: 40; 
             display: flex; align-items: center; padding: 0 16px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* SIDEBAR MENU - SOMBRA LIMPIA */
+        /* SIDEBAR MENU */
         .sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .sidebar-backdrop.open { opacity: 1; pointer-events: auto; }
-        
         .sidebar-menu { 
             position: fixed; top: 0; left: 0; height: 100%; width: 280px; 
             background: #0f0f0f; z-index: 70; 
             transform: translateX(-100%); 
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            border-right: 1px solid #222; 
-            display: flex; flex-direction: column;
+            border-right: 1px solid #222; display: flex; flex-direction: column;
             box-shadow: none; 
         }
-        .sidebar-menu.open { 
-            transform: translateX(0); 
-            box-shadow: 10px 0 50px rgba(0,0,0,0.5); 
-        }
-
+        .sidebar-menu.open { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
         .sidebar-link { width: 100%; text-align: left; padding: 12px 16px; border-radius: 8px; color: #aaa; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 12px; transition: all 0.2s; text-decoration: none; }
         .sidebar-link:active, .sidebar-link.active { background: rgba(255,255,255,0.1); color: white; }
 
-        /* ANIMACIONES */
+        /* ANIMACIONES Y ESTILOS */
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; z-index: 0; }
         .hero-slide.active { opacity: 1; z-index: 1; }
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* VISTAS (SPA) */
+        
         .view-container { display: none; width: 100%; }
         .view-container.active { display: block; animation: fadeIn 0.3s ease-out; }
 
-        /* BUSCADOR */
         .search-input-modern { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
         .search-input-modern:focus { background: rgba(0, 0, 0, 0.8); border-color: #e50914; }
 
-        /* CHIPS CATEGORIAS */
-        .cat-chip {
-            padding: 6px 16px; border-radius: 999px; font-size: 11px; font-weight: 700;
-            white-space: nowrap; transition: all 0.3s ease; border: 1px solid transparent;
-            background: #1a1a1a; color: #aaa; border-color: #333;
-        }
-        .cat-chip.active {
-            background: #fff; color: #000; border-color: #fff; transform: scale(1.05); box-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
+        .cat-chip { padding: 6px 16px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; transition: all 0.3s ease; border: 1px solid transparent; background: #1a1a1a; color: #aaa; border-color: #333; }
+        .cat-chip.active { background: #fff; color: #000; border-color: #fff; transform: scale(1.05); }
 
         .z-modal { z-index: 100; }
         .ad-banner-wrapper { width: 100%; display: flex; justify-content: center; margin: 20px 0; overflow: hidden; position: relative; z-index: 10; }
         
-        /* Botones Episodios */
-        .episode-btn {
-            background: #1a1a1a; border: 1px solid #333; color: #ccc;
-            padding: 12px 8px; border-radius: 8px; text-align: left; font-size: 12px; font-weight: 500;
-            transition: all 0.2s; cursor: pointer; display: flex; align-items: center; gap: 8px; overflow: hidden;
-        }
+        .episode-btn { background: #1a1a1a; border: 1px solid #333; color: #ccc; padding: 12px 8px; border-radius: 8px; text-align: left; font-size: 12px; font-weight: 500; transition: all 0.2s; cursor: pointer; display: flex; align-items: center; gap: 8px; overflow: hidden; }
         .episode-btn:hover { background: #333; border-color: #555; color: white; }
         
         input, select, textarea { font-size: 16px !important; }
@@ -129,11 +109,9 @@
             </div>
             
             <div class="border-t border-gray-800 pt-4 mt-auto space-y-1">
-                <!-- BOTÓN DE ENVÍO/PAGO DIRECTO (MEJORADO) -->
-                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=Carlosmora040509@gmail.com&item_name=Apoyo+CineStream&currency_code=USD&no_shipping=1&no_note=1" target="_blank" class="sidebar-link text-blue-400 hover:bg-blue-500/10 hover:text-blue-300">
-                    <i class="fa-brands fa-paypal"></i> Donacion (PayPal)
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=Carlosmora040509@gmail.com&item_name=Apoyo+CineStream&currency_code=USD&no_shipping=1&no_note=1" target="_blank" class="sidebar-link text-yellow-500 hover:bg-yellow-500/10 hover:text-yellow-400">
+                    <i class="fa-solid fa-heart"></i> Donar (PayPal)
                 </a>
-                
                 <button onclick="toggleMenu(); openLoginModal()" class="sidebar-link text-red-500 hover:bg-red-500/10 hover:text-red-400">
                     <i class="fa-solid fa-lock"></i> Panel Admin
                 </button>
@@ -141,7 +119,7 @@
         </div>
     </aside>
 
-    <!-- HEADER SUPERIOR -->
+    <!-- HEADER -->
     <header class="glass-header shadow-2xl">
         <div class="w-full flex items-center justify-between px-4 max-w-[1920px] mx-auto">
             <div class="flex items-center gap-4">
@@ -151,8 +129,6 @@
                     <h1 class="text-xl font-black tracking-tighter text-white hidden sm:block">CINE<span class="text-[#e50914]">STREAM</span></h1>
                 </div>
             </div>
-
-            <!-- BUSCADOR ESCRITORIO -->
             <div class="hidden md:flex flex-1 max-w-lg mx-8 relative group">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
                 <input type="text" id="desktopSearch" onfocus="activateSearchMode()" oninput="handleSearch(this.value)" 
@@ -160,7 +136,6 @@
                     placeholder="Buscar películas...">
                 <button onclick="exitSearchMode()" id="closeSearchDesktop" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
             <div class="flex items-center gap-3">
                 <button onclick="activateSearchMode()" class="md:hidden w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-300"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <button onclick="openLoginModal()" class="hidden md:flex bg-[#e50914] hover:bg-red-700 text-white px-5 py-2 rounded-full text-xs font-bold items-center gap-2"><i class="fa-solid fa-user-gear"></i> ADMIN</button>
@@ -168,91 +143,71 @@
         </div>
     </header>
 
-    <!-- BARRA DE CATEGORÍAS FIJA -->
+    <!-- BARRA CATEGORÍAS -->
     <div class="category-bar">
-        <div id="categoryContainer" class="flex gap-2 overflow-x-auto hide-scrollbar w-full">
-            <!-- Se llena con JS -->
-        </div>
+        <div id="categoryContainer" class="flex gap-2 overflow-x-auto hide-scrollbar w-full"></div>
     </div>
 
-    <!-- PANTALLA DE CARGA -->
+    <!-- LOADER -->
     <div id="loader" class="fixed inset-0 z-[10000] bg-[#000000] flex flex-col items-center justify-center">
         <div class="w-12 h-12 border-4 border-[#e50914] border-t-transparent rounded-full animate-spin mb-4"></div>
         <p class="text-gray-500 text-[10px] font-bold tracking-widest uppercase animate-pulse">CARGANDO...</p>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- MAIN CONTENT -->
     <main class="flex-grow w-full px-0 pb-32">
-
-        <!-- === VISTA 1: INICIO (HOME) === -->
+        <!-- VISTA HOME -->
         <div id="home-view" class="view-container active">
-            
-            <!-- Empty State -->
             <div id="emptyState" class="hidden flex-col items-center justify-center h-[40vh] text-center px-4">
                 <i class="fa-solid fa-folder-open text-4xl text-gray-800 mb-4"></i>
                 <h2 class="text-lg font-bold text-gray-500">No hay contenido</h2>
                 <p class="text-xs text-gray-600">Añade películas desde el panel de administrador.</p>
             </div>
-
-            <!-- Hero Carousel -->
             <div id="heroCarousel" class="relative w-full aspect-[2/3] md:aspect-[21/9] md:h-[75vh] bg-[#0a0a0a] shadow-2xl overflow-hidden group mb-6">
                 <div id="heroSlidesContainer" class="w-full h-full relative"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent z-10 pointer-events-none"></div>
                 <div class="absolute bottom-0 left-0 w-full p-6 md:p-16 flex flex-col items-start gap-3 pb-12 z-20 transition-all duration-500" id="heroTextContent"></div>
                 <div class="absolute bottom-4 right-6 z-30 flex gap-2" id="heroIndicators"></div>
             </div>
-
-            <!-- Anuncio 1 -->
             <div class="ad-banner-wrapper">
                 <script type="text/javascript">
                     atOptions = { 'key' : 'e47d6f0767e56434ce3b6b2d71ec250b', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
                 </script>
                 <script type="text/javascript" src="https://www.highperformanceformat.com/e47d6f0767e56434ce3b6b2d71ec250b/invoke.js"></script>
             </div>
-
-            <!-- Listas de Películas -->
             <div id="rowsContainer" class="space-y-10 px-0 mt-4"></div>
         </div>
 
-        <!-- === VISTA 2: BÚSQUEDA (TOTALMENTE APARTE) === -->
+        <!-- VISTA BÚSQUEDA -->
         <div id="search-view" class="view-container bg-black min-h-screen fixed inset-0 top-[70px] z-40 overflow-y-auto hidden">
             <div class="p-4 max-w-7xl mx-auto">
-                <!-- Input Móvil Grande -->
                 <div class="md:hidden mb-6 flex gap-2">
                     <div class="relative flex-1">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                        <input type="text" id="mobileSearchInput" oninput="handleSearch(this.value)" 
-                            class="w-full bg-[#1a1a1a] border border-gray-700 rounded-xl pl-11 pr-4 py-3 text-white outline-none focus:border-[#e50914] text-lg" 
-                            placeholder="Escribe para buscar...">
+                        <input type="text" id="mobileSearchInput" oninput="handleSearch(this.value)" class="w-full bg-[#1a1a1a] border border-gray-700 rounded-xl pl-11 pr-4 py-3 text-white outline-none focus:border-[#e50914] text-lg" placeholder="Escribe para buscar...">
                     </div>
                     <button onclick="exitSearchMode()" class="text-gray-400 font-bold px-2">Cancelar</button>
                 </div>
-
                 <div class="flex justify-between items-end mb-4 border-b border-white/10 pb-2">
                     <h2 class="text-xl font-bold text-white">Resultados: <span id="searchTerm" class="text-[#e50914] italic"></span></h2>
                     <span id="resultsCount" class="text-xs text-gray-500 uppercase">0 encontrados</span>
                 </div>
-
-                <!-- Anuncio 2 -->
                 <div class="ad-banner-wrapper">
                     <script type="text/javascript">
                       atOptions = { 'key' : 'e47d6f0767e56434ce3b6b2d71ec250b', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
                     </script>
                     <script type="text/javascript" src="https://www.highperformanceformat.com/e47d6f0767e56434ce3b6b2d71ec250b/invoke.js"></script>
                 </div>
-
                 <div id="searchGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
-                
                 <div id="noResults" class="hidden flex-col items-center justify-center py-20 opacity-50">
                     <i class="fa-solid fa-film text-6xl mb-4"></i>
                     <p>No encontramos nada con ese nombre.</p>
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- DETALLES (OVERLAY) -->
+    <!-- DETALLES -->
     <div id="detailsPage" class="fixed inset-0 z-modal bg-[#000000] hidden flex-col overflow-y-auto fade-in pb-20">
         <button onclick="closeDetails()" class="fixed top-4 right-4 z-50 w-10 h-10 bg-black/50 backdrop-blur rounded-full text-white flex items-center justify-center border border-white/10 active:scale-90 transition-transform"><i class="fa-solid fa-xmark text-lg"></i></button>
         <div class="relative w-full aspect-[4/3] md:aspect-[21/9] md:h-[60vh] shrink-0">
@@ -260,10 +215,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent"></div>
         </div>
         <div class="px-6 -mt-12 relative z-10 flex flex-col gap-4">
-            <div>
-                <div class="flex items-center gap-3 mb-2 flex-wrap" id="detailTags"></div>
-                <h1 id="detailTitle" class="text-3xl md:text-5xl font-black leading-tight text-white mb-2 mt-2">Título</h1>
-            </div>
+            <div><div class="flex items-center gap-3 mb-2 flex-wrap" id="detailTags"></div><h1 id="detailTitle" class="text-3xl md:text-5xl font-black leading-tight text-white mb-2 mt-2">Título</h1></div>
             <div id="singlePlayContainer">
                 <button id="detailPlayBtn" class="w-full md:w-auto bg-[#e50914] hover:bg-red-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-red-900/30 flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
                     <i class="fa-solid fa-play text-xl"></i> REPRODUCIR
@@ -276,11 +228,7 @@
                 </div>
                 <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2"></div>
             </div>
-            <div class="mt-2">
-                <h3 class="text-xs font-bold text-gray-500 uppercase mb-2">Sinopsis</h3>
-                <p id="detailDesc" class="text-gray-300 leading-relaxed text-sm md:text-base">Descripción...</p>
-            </div>
-            <!-- Anuncio 3 -->
+            <div class="mt-2"><h3 class="text-xs font-bold text-gray-500 uppercase mb-2">Sinopsis</h3><p id="detailDesc" class="text-gray-300 leading-relaxed text-sm md:text-base">Descripción...</p></div>
             <div class="ad-banner-wrapper">
                 <script type="text/javascript">
                   atOptions = { 'key' : 'e47d6f0767e56434ce3b6b2d71ec250b', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
@@ -290,7 +238,7 @@
         </div>
     </div>
 
-    <!-- LOGIN MODAL CON HASH -->
+    <!-- LOGIN MODAL -->
     <div id="loginModal" class="fixed inset-0 z-modal bg-black/95 hidden flex-col items-center justify-center p-6 fade-in backdrop-blur-sm">
         <div class="bg-[#121212] w-full max-w-xs p-8 rounded-3xl border border-gray-800 shadow-2xl relative">
             <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-500 p-2"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -397,10 +345,10 @@
         let editingId = null;
         let currentSeasons = [];
         let viewingMovie = null;
+        let episodeEditTarget = null;
 
-        // SEGURIDAD: Hash + Backup en Base64
-        const ADMIN_HASH = "f95205461208e99092497645086d843840242502621021424755106208051252"; // SHA256 de Jose5656
-        const BACKUP_CODE = "Sm9zZTU2NTY="; // Base64 de Jose5656 (Fallback infalible)
+        const ADMIN_HASH = "f95205461208e99092497645086d843840242502621021424755106208051252";
+        const BACKUP_CODE = "Sm9zZTU2NTY="; 
 
         const GENRES = ['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción', 'Animación', 'Aventura', 'Romance', 'Fantasía'];
         let currentFilter = { type: 'Inicio', genre: null };
@@ -424,7 +372,6 @@
             document.getElementById('menuBackdrop').classList.toggle('open');
         }
 
-        // --- SISTEMA DE PÁGINAS (HOME VS SEARCH) ---
         window.activateSearchMode = () => {
             document.getElementById('home-view').classList.remove('active');
             document.getElementById('search-view').classList.add('active');
@@ -444,7 +391,6 @@
 
         window.goHome = () => { exitSearchMode(); }
 
-        // --- BÚSQUEDA LOGICA ---
         window.handleSearch = (q) => {
             const grid = document.getElementById('searchGrid');
             const noRes = document.getElementById('noResults');
@@ -473,7 +419,6 @@
             }
         }
 
-        // --- SEGURIDAD HÍBRIDA (Hash + Fallback) ---
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -485,18 +430,13 @@
 
         window.checkPassword = async () => {
             const inputPass = document.getElementById('adminPassword').value.trim();
-            
-            // 1. Fallback Universal (Base64) - Funciona en todos los entornos (http/https/file)
             if(btoa(inputPass) === BACKUP_CODE) { loginSuccess(); return; }
-
-            // 2. Hash Seguro (Solo si crypto está disponible en el navegador)
             try {
                 if (window.crypto && window.crypto.subtle) {
                     const hash = await sha256(inputPass);
                     if(hash === ADMIN_HASH) { loginSuccess(); return; }
                 }
             } catch (e) {}
-
             showToast("Contraseña incorrecta", "error");
         }
 
@@ -508,7 +448,6 @@
             window.toggleTypeInputs();
         }
 
-        // --- CORE UI ---
         window.filterByType = (type) => {
             currentFilter = { type: type, genre: null };
             document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
@@ -529,7 +468,6 @@
             if (currentFilter.type !== 'Inicio') displayedMovies = displayedMovies.filter(m => m.type === currentFilter.type);
             if (currentFilter.genre && currentFilter.genre !== 'Todos') displayedMovies = displayedMovies.filter(m => m.category === currentFilter.genre || m.category2 === currentFilter.genre);
 
-            // CORRECCIÓN DEL BUG DE CONTENIDO OCULTO
             if (displayedMovies.length === 0) { 
                 hero.classList.add('hidden'); 
                 rows.classList.add('hidden'); 
@@ -563,7 +501,6 @@
             }
         }
 
-        // --- RENDER CHIPS ---
         window.renderGenreChips = function() {
             const c = document.getElementById('categoryContainer');
             let h = `<button onclick="window.setGenre(null)" class="cat-chip ${!currentFilter.genre ? 'active' : ''}">Todo</button>`;
@@ -573,7 +510,6 @@
 
         function createRow(c, t, l) { c.insertAdjacentHTML('beforeend', `<div class="group pl-4 md:pl-8"><h3 class="text-sm font-bold text-gray-300 mb-3 flex items-center gap-2 border-l-2 border-[#e50914] pl-2 uppercase tracking-wide">${t}</h3><div class="flex gap-3 md:gap-4 overflow-x-auto hide-scrollbar pr-4 snap-x items-center">${l.map(m => `<div onclick='window.openDetailsById("${m.id}")' class="poster-card flex-none w-[130px] md:w-[200px] aspect-[2/3] bg-[#1a1a1a] rounded-lg overflow-hidden cursor-pointer relative snap-start shadow-md border border-white/5 transition-transform active:scale-95"><img src="${m.thumbnail}" class="w-full h-full object-cover"><div class="absolute top-1 right-1 bg-black/60 backdrop-blur-md text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase border border-white/10">${m.type || 'Película'}</div></div>`).join('')}</div></div>`); }
 
-        // --- DETAILS & PLAYER ---
         window.openDetailsById = (id) => { const m = movies.find(x => x.id == id); if(m) window.openDetails(m); }
         window.openDetails = (m) => {
             viewingMovie = m; const p = document.getElementById('detailsPage');
@@ -599,18 +535,132 @@
         window.addSeason = () => { currentSeasons.push({name:`Temp ${currentSeasons.length+1}`, episodes:[]}); renderSeasonsAdmin(); }
         window.removeSeason = (i) => { if(confirm('¿Borrar?')) { currentSeasons.splice(i,1); renderSeasonsAdmin(); } }
         window.updateSeasonName = (i,v) => { currentSeasons[i].name = v; }
-        window.addEpisodeToSeason = (i) => { const n = document.getElementById(`epName_${i}`).value.trim(); const u = document.getElementById(`epUrl_${i}`).value.trim(); if(!u) return showToast('Falta URL', 'error'); currentSeasons[i].episodes.push({name:n||`Cap ${currentSeasons[i].episodes.length+1}`, url:u}); document.getElementById(`epName_${i}`).value=''; document.getElementById(`epUrl_${i}`).value=''; renderSeasonsAdmin(); }
+        
+        // GESTIÓN EPISODIOS (ADD/UPDATE)
+        window.editEpisode = (sIdx, eIdx) => {
+            episodeEditTarget = { sIdx, eIdx };
+            renderSeasonsAdmin();
+        }
+
+        window.cancelEpisodeEdit = () => {
+            episodeEditTarget = null;
+            renderSeasonsAdmin();
+        }
+
+        window.addEpisodeToSeason = (sIdx) => {
+            const nameInp = document.getElementById(`epName_${sIdx}`);
+            const urlInp = document.getElementById(`epUrl_${sIdx}`);
+            const name = nameInp.value.trim();
+            const url = urlInp.value.trim();
+
+            if(!url) return showToast('Falta URL', 'error');
+
+            if (episodeEditTarget && episodeEditTarget.sIdx === sIdx) {
+                // MODO ACTUALIZAR
+                currentSeasons[sIdx].episodes[episodeEditTarget.eIdx] = { name: name || `Cap ${episodeEditTarget.eIdx+1}`, url: url };
+                episodeEditTarget = null;
+            } else {
+                // MODO AÑADIR
+                currentSeasons[sIdx].episodes.push({ name: name || `Cap ${currentSeasons[sIdx].episodes.length+1}`, url: url });
+            }
+            
+            renderSeasonsAdmin();
+        }
+
         window.removeEpisodeFromSeason = (sI, eI) => { currentSeasons[sI].episodes.splice(eI,1); renderSeasonsAdmin(); }
-        window.renderSeasonsAdmin = () => { const c = document.getElementById('seasonsAdminContainer'); if(currentSeasons.length===0) { c.innerHTML='<p class="text-xs text-gray-500 text-center">Sin temporadas</p>'; return; } c.innerHTML = currentSeasons.map((s,i) => `<div class="bg-[#222] p-2 rounded border border-gray-700"><div class="flex justify-between mb-2"><input value="${s.name}" onchange="updateSeasonName(${i},this.value)" class="bg-transparent text-sm font-bold text-white w-2/3"><button onclick="removeSeason(${i})" class="text-red-500"><i class="fa-solid fa-trash"></i></button></div><div class="space-y-1 max-h-32 overflow-y-auto">${s.episodes.map((e,j)=>`<div class="flex justify-between text-xs bg-black/30 p-1 rounded"><span class="truncate w-3/4">${e.name}</span><button onclick="removeEpisodeFromSeason(${i},${j})" class="text-gray-500 hover:text-red-500">x</button></div>`).join('')}</div><div class="mt-2 flex gap-1"><input id="epName_${i}" placeholder="Nom" class="w-1/3 bg-black border border-gray-600 rounded px-1 text-xs text-white"><input id="epUrl_${i}" placeholder="URL" class="w-1/2 bg-black border border-gray-600 rounded px-1 text-xs text-white"><button onclick="addEpisodeToSeason(${i})" class="bg-gray-700 text-white px-2 rounded text-xs">+</button></div></div>`).join(''); }
+        
+        window.renderSeasonsAdmin = () => { 
+            const c = document.getElementById('seasonsAdminContainer'); 
+            if(currentSeasons.length===0) { c.innerHTML='<p class="text-xs text-gray-500 text-center">Sin temporadas</p>'; return; } 
+            
+            c.innerHTML = currentSeasons.map((s,i) => {
+                const isEditing = episodeEditTarget && episodeEditTarget.sIdx === i;
+                const editNameVal = isEditing ? s.episodes[episodeEditTarget.eIdx].name : '';
+                const editUrlVal = isEditing ? s.episodes[episodeEditTarget.eIdx].url : '';
+                const btnText = isEditing ? 'GUARDAR' : 'AÑADIR';
+                const btnColor = isEditing ? 'bg-green-600' : 'bg-[#e50914]';
+                const cancelBtn = isEditing ? `<button onclick="cancelEpisodeEdit()" class="text-xs text-gray-400 underline ml-2">Cancelar</button>` : '';
+
+                return `
+                <div class="bg-[#1a1a1a] border border-gray-800 rounded-xl p-3 mb-3 shadow-sm">
+                    <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-800">
+                        <input value="${s.name}" onchange="updateSeasonName(${i},this.value)" class="bg-transparent font-bold text-sm text-white w-full outline-none focus:text-[#e50914]" placeholder="Nombre Temporada">
+                        <button onclick="removeSeason(${i})" class="text-red-500 p-2 hover:bg-red-500/10 rounded ml-2"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                    <ul class="space-y-2 mb-3 max-h-40 overflow-y-auto custom-scrollbar">
+                        ${s.episodes.map((e,j)=>`
+                            <li class="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 overflow-hidden flex-1">
+                                    <i class="fa-solid fa-play text-[10px] text-gray-500"></i>
+                                    <span class="text-xs text-gray-300 truncate">${e.name}</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button type="button" onclick="editEpisode(${i},${j})" class="text-blue-400 hover:text-blue-300 p-1"><i class="fa-solid fa-pen"></i></button>
+                                    <button type="button" onclick="removeEpisodeFromSeason(${i},${j})" class="text-gray-500 hover:text-red-400 p-1"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </li>`).join('')}
+                    </ul>
+                    <div class="flex flex-col gap-2 bg-black/30 p-2 rounded-lg">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">${isEditing ? 'Editando Episodio' : 'Nuevo Episodio'}</span>
+                            ${cancelBtn}
+                        </div>
+                        <input id="epName_${i}" value="${editNameVal}" placeholder="Nombre (Ej: Cap 1)" class="w-full bg-transparent border-b border-gray-700 p-1.5 text-xs text-white outline-none focus:border-[#e50914]">
+                        <div class="flex gap-2 mt-1">
+                            <input id="epUrl_${i}" value="${editUrlVal}" placeholder="https://..." class="flex-1 bg-transparent border-b border-gray-700 p-1.5 text-xs text-white outline-none focus:border-[#e50914]">
+                            <button type="button" onclick="addEpisodeToSeason(${i})" class="${btnColor} text-white px-4 py-1.5 rounded text-xs font-bold shadow-lg shadow-black/20 active:scale-95 transition-colors">${btnText}</button>
+                        </div>
+                    </div>
+                </div>`;
+            }).join(''); 
+        }
         
         window.switchTab = (t) => { document.getElementById('viewAdd').className = t==='add'?"absolute inset-0 lg:static lg:w-1/3 p-4 overflow-y-auto bg-[#0a0a0a] z-10 pb-24":"hidden"; document.getElementById('viewList').className = t==='list'?"absolute inset-0 lg:static lg:w-2/3 flex flex-col bg-[#111] z-10":"hidden"; document.getElementById('tabAdd').className = t==='add'?"flex-1 py-3 text-xs font-bold text-[#e50914] border-b-2 border-[#e50914]":"flex-1 py-3 text-xs font-bold text-gray-500 border-b-2 border-transparent"; document.getElementById('tabList').className = t==='list'?"flex-1 py-3 text-xs font-bold text-[#e50914] border-b-2 border-[#e50914]":"flex-1 py-3 text-xs font-bold text-gray-500 border-b-2 border-transparent"; }
-        window.handleEditMovie = (id) => { const m = movies.find(x=>x.id==id); if(!m) return; document.getElementById('inpType').value=m.type||'Película'; document.getElementById('inpTitle').value=m.title; document.getElementById('inpCategory').value=m.category; document.getElementById('inpCategory2').value=m.category2||''; document.getElementById('inpLanguage').value=m.language||'Latino'; document.getElementById('inpThumbnail').value=m.thumbnail; document.getElementById('inpDesc').value=m.description; const isM = (m.seasons&&m.seasons.length>0)||(m.episodes&&m.episodes.length>0); Array.from(document.getElementsByName('format')).forEach(r=>r.checked=(r.value===(isM?'series':'single'))); if(!isM) { document.getElementById('inpVideo').value=m.videoUrl||''; currentSeasons=[]; } else { document.getElementById('inpVideo').value=''; currentSeasons = (m.seasons&&m.seasons.length>0)?JSON.parse(JSON.stringify(m.seasons)):[{name:'Temp 1', episodes:m.episodes}]; } toggleTypeInputs(); renderSeasonsAdmin(); editingId=id; document.getElementById('submitBtn').innerText="ACTUALIZAR"; document.getElementById('editModeBar').classList.remove('hidden'); switchTab('add'); }
-        window.cancelEdit = () => { editingId=null; document.getElementById('movieForm').reset(); currentSeasons=[]; document.getElementById('inpType').value='Película'; toggleTypeInputs(); document.getElementById('submitBtn').innerText="PUBLICAR"; document.getElementById('editModeBar').classList.add('hidden'); }
-        window.handleAddMovie = async (e) => { e.preventDefault(); const d = new FormData(e.target); const isS = !document.getElementById('seriesManager').classList.contains('hidden'); if(isS && currentSeasons.length===0) return showToast('Añade temporadas', 'error'); const vid = d.get('videoUrl').replace('watch?v=', 'embed/'); const md = { type: d.get('type'), title: d.get('title'), category: d.get('category'), category2: d.get('category2'), language: d.get('language'), thumbnail: d.get('thumbnail'), description: d.get('description'), createdAt: serverTimestamp(), videoUrl: !isS?vid:"", seasons: isS?currentSeasons:[] }; try { if(editingId) { delete md.createdAt; await updateDoc(doc(db, 'movies', editingId), md); showToast('Actualizado', 'success'); cancelEdit(); } else { await addDoc(collection(db, 'movies'), md); e.target.reset(); currentSeasons=[]; toggleTypeInputs(); showToast('Guardado', 'success'); } } catch(err) { console.log(err); showToast('Error', 'error'); } }
+        
+        window.handleEditMovie = (id) => { 
+            const m = movies.find(x=>x.id==id); if(!m) return; 
+            document.getElementById('inpType').value=m.type||'Película'; 
+            document.getElementById('inpTitle').value=m.title; 
+            document.getElementById('inpCategory').value=m.category; 
+            document.getElementById('inpCategory2').value=m.category2||''; 
+            document.getElementById('inpLanguage').value=m.language||'Latino'; 
+            document.getElementById('inpThumbnail').value=m.thumbnail; 
+            document.getElementById('inpDesc').value=m.description; 
+            
+            const isSeries = (m.seasons&&m.seasons.length>0)||(m.episodes&&m.episodes.length>0); 
+            const formatVal = isSeries ? 'series' : 'single';
+            
+            const radios = document.getElementsByName('format');
+            radios.forEach(r => r.checked = (r.value === formatVal));
+            
+            const type = m.type || 'Película';
+            const showSelector = (type === 'Anime' || type === 'K-Drama');
+            document.getElementById('formatSelector').className = showSelector ? "bg-[#161616] p-2 rounded-xl border border-gray-800 mb-3" : "hidden";
+            
+            if (formatVal === 'single') {
+                document.getElementById('movieUrlInput').classList.remove('hidden');
+                document.getElementById('seriesManager').classList.add('hidden');
+                document.getElementById('inpVideo').value = m.videoUrl || ''; 
+                currentSeasons = [];
+            } else {
+                document.getElementById('movieUrlInput').classList.add('hidden');
+                document.getElementById('seriesManager').classList.remove('hidden');
+                document.getElementById('inpVideo').value = '';
+                currentSeasons = (m.seasons&&m.seasons.length>0)?JSON.parse(JSON.stringify(m.seasons)):[{name:'Temp 1', episodes:m.episodes||[]}];
+                renderSeasonsAdmin();
+            }
+
+            editingId=id; 
+            document.getElementById('submitBtn').innerText="ACTUALIZAR"; 
+            document.getElementById('editModeBar').classList.remove('hidden'); 
+            switchTab('add'); 
+        }
+
+        window.cancelEdit = () => { editingId=null; document.getElementById('movieForm').reset(); currentSeasons=[]; document.getElementById('inpType').value='Película'; window.toggleTypeInputs(); document.getElementById('submitBtn').innerText="PUBLICAR"; document.getElementById('editModeBar').classList.add('hidden'); }
+        window.handleAddMovie = async (e) => { e.preventDefault(); const d = new FormData(e.target); const isS = !document.getElementById('seriesManager').classList.contains('hidden'); if(isS && currentSeasons.length===0) return showToast('Añade temporadas', 'error'); const vid = d.get('videoUrl').replace('watch?v=', 'embed/'); const md = { type: d.get('type'), title: d.get('title'), category: d.get('category'), category2: d.get('category2'), language: d.get('language'), thumbnail: d.get('thumbnail'), description: d.get('description'), createdAt: serverTimestamp(), videoUrl: !isS?vid:"", seasons: isS?currentSeasons:[] }; try { if(editingId) { delete md.createdAt; await updateDoc(doc(db, 'movies', editingId), md); showToast('Actualizado', 'success'); cancelEdit(); } else { await addDoc(collection(db, 'movies'), md); e.target.reset(); currentSeasons=[]; window.toggleTypeInputs(); showToast('Guardado', 'success'); } } catch(err) { console.log(err); showToast('Error', 'error'); } }
         window.handleDeleteMovie = async (id) => { if(confirm('¿Eliminar?')) await deleteDoc(doc(db, 'movies', id)); }
         window.renderAdminList = (s="") => { const l = document.getElementById('adminList'); let f = movies; if(s) f = movies.filter(x=>x.title.toLowerCase().includes(s.toLowerCase())); document.getElementById('count').innerText=`${f.length} ITEMS`; l.innerHTML = f.map(m=>`<div class="flex gap-3 bg-[#161616] p-2 rounded border border-gray-800 items-center"><img src="${m.thumbnail}" class="w-8 h-12 object-cover bg-black"><div class="flex-1 min-w-0"><div class="font-bold text-xs truncate text-white">${m.title}</div><div class="text-[10px] text-gray-500">${m.type}</div></div><button onclick="handleEditMovie('${m.id}')" class="text-blue-500 px-2"><i class="fa-solid fa-pen"></i></button><button onclick="handleDeleteMovie('${m.id}')" class="text-red-500 px-2"><i class="fa-solid fa-trash"></i></button></div>`).join(''); }
 
-        // --- CAROUSEL ---
         function initHeroCarousel(list) { const c = document.getElementById('heroSlidesContainer'); const d = document.getElementById('heroIndicators'); if(slideInterval) clearInterval(slideInterval); c.innerHTML=''; d.innerHTML=''; activeSlideIndex=0; list.forEach((m,i)=>{ c.innerHTML+=`<div class="hero-slide ${i===0?'active':''}"><img src="${m.thumbnail}" class="w-full h-full object-cover opacity-80"></div>`; d.innerHTML+=`<button class="w-2 h-2 rounded-full transition-all ${i===0?'bg-white w-4':'bg-white/50'}" onclick="manualChangeSlide(${i})"></button>`; }); updateHeroText(list[0]); slideInterval = setInterval(()=>{ let n=activeSlideIndex+1; if(n>=list.length) n=0; manualChangeSlide(n, list); }, 6000); }
         window.manualChangeSlide = (i, l=movies.slice(0,5)) => { document.querySelectorAll('.hero-slide')[activeSlideIndex].classList.remove('active'); document.getElementById('heroIndicators').children[activeSlideIndex].className='w-2 h-2 rounded-full bg-white/50'; activeSlideIndex=i; document.querySelectorAll('.hero-slide')[activeSlideIndex].classList.add('active'); document.getElementById('heroIndicators').children[activeSlideIndex].className='w-2 h-2 rounded-full bg-white w-4'; updateHeroText(l[i]); }
         function updateHeroText(m) { const c = document.getElementById('heroTextContent'); c.style.opacity=0; setTimeout(()=>{ c.innerHTML=`<div class="flex gap-2 mb-2"><span class="bg-[#e50914] px-2 py-1 rounded text-[10px] font-bold uppercase">${m.type}</span></div><h1 class="text-4xl md:text-6xl font-black drop-shadow-2xl line-clamp-2">${m.title}</h1><p class="text-sm text-gray-200 line-clamp-2 max-w-xl font-medium mt-2">${m.description}</p><button onclick="openDetailsById('${m.id}')" class="bg-white text-black px-6 py-2 rounded font-bold mt-4 shadow-lg hover:bg-gray-200 flex items-center gap-2"><i class="fa-solid fa-circle-info"></i> DETALLES</button>`; c.style.opacity=1; },300); }
