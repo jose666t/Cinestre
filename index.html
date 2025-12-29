@@ -81,9 +81,15 @@
         .episode-btn { background: #1a1a1a; border: 1px solid #333; color: #ccc; padding: 12px 8px; border-radius: 8px; text-align: left; font-size: 12px; font-weight: 500; transition: all 0.2s; cursor: pointer; display: flex; align-items: center; gap: 8px; overflow: hidden; }
         .episode-btn:hover { background: #333; border-color: #555; color: white; }
         
-        /* Ajuste para embeds personalizados */
+        /* Ajuste para embeds personalizados y TV */
         #playerContainer > div { width: 100%; height: 100%; }
         
+        /* Mejoras para TV y Pantallas Grandes */
+        @media (min-width: 1920px) {
+            body { font-size: 18px; }
+            .poster-card { width: 260px !important; }
+        }
+
         input, select, textarea { font-size: 16px !important; }
     </style>
 </head>
@@ -201,7 +207,7 @@
                     </script>
                     <script type="text/javascript" src="https://www.highperformanceformat.com/e47d6f0767e56434ce3b6b2d71ec250b/invoke.js"></script>
                 </div>
-                <div id="searchGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
+                <div id="searchGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"></div>
                 <div id="noResults" class="hidden flex-col items-center justify-center py-20 opacity-50">
                     <i class="fa-solid fa-film text-6xl mb-4"></i>
                     <p>No encontramos nada con ese nombre.</p>
@@ -293,6 +299,7 @@
                         <select name="language" id="inpLanguage" class="w-full bg-[#161616] border border-gray-800 rounded-xl p-3.5 text-white outline-none text-sm"><option>Latino</option><option>Castellano</option><option>Inglés</option><option>Subtitulado</option></select>
                         <input type="url" name="thumbnail" id="inpThumbnail" required class="w-full bg-[#161616] border border-gray-800 rounded-xl p-3.5 text-white outline-none text-sm" placeholder="URL Imagen">
                     </div>
+                    <!-- INPUT PARA LINK ÚNICO (PELÍCULAS) - TYPE TEXT PARA EMBEDS -->
                     <div id="movieUrlInput" class="hidden">
                         <input type="text" name="videoUrl" id="inpVideo" class="w-full bg-[#161616] border border-gray-800 rounded-xl p-3.5 text-white focus:border-[#e50914] outline-none text-sm" placeholder="URL Video (YouTube / MP4 / Embed)">
                     </div>
@@ -348,7 +355,7 @@
         let editingId = null;
         let currentSeasons = [];
         let viewingMovie = null;
-        let episodeEditTarget = null; // Para edición de episodios
+        let episodeEditTarget = null; 
 
         const ADMIN_HASH = "f95205461208e99092497645086d843840242502621021424755106208051252";
         const BACKUP_CODE = "Sm9zZTU2NTY="; 
@@ -375,7 +382,7 @@
             document.getElementById('menuBackdrop').classList.toggle('open');
         }
 
-        // --- PLAYER LOGIC (100% Compatibilidad Embeds) ---
+        // --- PLAYER LOGIC (100% Compatibilidad Embeds + Clean Reset) ---
         window.openPlayer = (url) => {
             const m = document.getElementById('playerModal');
             const c = document.getElementById('playerContainer');
@@ -384,7 +391,7 @@
             if (playerInstance) { playerInstance.destroy(); playerInstance = null; }
             c.innerHTML = '';
 
-            // 1. Detectar si es CODIGO HTML (Embed completo <div... <iframe...)
+            // 1. Detectar si es CODIGO HTML (Embed completo)
             if (src.startsWith('<')) {
                 c.innerHTML = src; 
                 const iframe = c.querySelector('iframe');
@@ -396,7 +403,7 @@
                 c.innerHTML = `<div class="plyr__video-embed" id="player"><iframe src="https://www.youtube.com/embed/${yId}?origin=https://plyr.io&iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe></div>`;
                 playerInstance = new Plyr('#player', { autoplay: true });
             } 
-            // 3. Video Directo
+            // 3. Video Directo (Plyr)
             else if (src.match(/\.(mp4|webm|ogg|mkv|m3u8)$/i)) {
                 c.innerHTML = `<video id="player" playsinline controls autoplay><source src="${src}" type="video/mp4" /></video>`;
                 playerInstance = new Plyr('#player', { autoplay: true });
@@ -423,9 +430,17 @@
             document.getElementById('search-view').classList.remove('active');
             document.getElementById('search-view').style.display = "none";
             document.getElementById('home-view').classList.add('active');
+            
+            // CLEAN RESET
             document.getElementById('desktopSearch').value = '';
             document.getElementById('mobileSearchInput').value = '';
+            document.getElementById('searchGrid').innerHTML = '';
+            document.getElementById('noResults').classList.add('hidden');
+            document.getElementById('searchTerm').innerText = '';
+            document.getElementById('resultsCount').innerText = '0 encontrados';
+            
             document.getElementById('closeSearchDesktop').classList.add('hidden');
+            updateUI(); // Refresh home logic just in case
         }
 
         window.goHome = () => { exitSearchMode(); }
@@ -439,7 +454,11 @@
             if(document.activeElement.id === 'desktopSearch') document.getElementById('mobileSearchInput').value = q;
             else document.getElementById('desktopSearch').value = q;
 
-            if(!q.trim()) { grid.innerHTML = ''; noRes.classList.remove('hidden'); return; }
+            if(!q.trim()) { 
+                grid.innerHTML = ''; 
+                noRes.classList.remove('hidden'); 
+                return; 
+            }
 
             term.innerText = q;
             const results = movies.filter(m => m.title.toLowerCase().includes(q.toLowerCase()));
@@ -531,7 +550,7 @@
                 rows.innerHTML = `
                     <div class="px-4">
                         <h2 class="text-lg font-bold mb-4 text-white uppercase border-b border-white/10 pb-2">${title}</h2>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                             ${displayedMovies.map(m => `
                                 <div onclick='window.openDetailsById("${m.id}")' class="aspect-[2/3] bg-[#1a1a1a] rounded-lg overflow-hidden cursor-pointer relative border border-white/5 group">
                                     <img src="${m.thumbnail}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
@@ -669,7 +688,6 @@
             
             const isSeries = (m.seasons&&m.seasons.length>0)||(m.episodes&&m.episodes.length>0); 
             const formatVal = isSeries ? 'series' : 'single';
-            
             const radios = document.getElementsByName('format');
             radios.forEach(r => r.checked = (r.value === formatVal));
             
